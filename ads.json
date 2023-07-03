@@ -12,5 +12,19 @@
         "tags": [
             "authentication"
         ]
+    },
+    "Test": {
+        "projectName": "Test",
+        "description": "Template",
+        "type": "community",
+        "author": "ak-gluu",
+        "version": "0.0.1",
+        "authorWebsite": "https://github.com/ak-gluu/test",
+        "githubUri": "https://github.com/ak-gluu/test",
+        "license": "MIT",
+        "lastUpdated": "1688386150730",
+        "tags": [
+            "jans"
+        ]
     }
 }
