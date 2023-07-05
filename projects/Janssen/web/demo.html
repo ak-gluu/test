@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:a4j="http://richfaces.org/a4j" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:rich="http://richfaces.org/rich" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" template="/WEB-INF/incl/layout/fullWidthEmpty.xhtml">
+    <ui:define name="head">
+        <style>
+            iframe {
+                margin-top: 10px;
+                margin-left: 1%;
+            }
+
+            .rf-msg-err {
+                color: white !important;
+                font-weight: bold;
+            }
+        </style>
+    </ui:define>
+    <ui:define name="body">
+        <rich:graphValidator id="gv" value="#{passwordResetAction}">
+            <header class="d-flex justify-content-between align-items-center login-header">
+
+                <span></span>
+                <a href="#">
+                    <img src="/oxauth/ext/resources/img/logos/dermalogica-logo.svg" alt="" />
+                </a>
+                <div>
+                    <!-- <img src="../../assets/img/icons/question.svg" alt=""> -->
+                </div>
+
+            </header>
+
+            <main class="main-content" id="content" role="main">
+
+                <div class="login py-11">
+                    <div class="container">
+                        <div class="row justify-content-center d-flex">
+                            <div class="col-12 col-sm-9 col-md-6 col-xl-5">
+                                <h1 class="text-center mb-7">Reset your password</h1>
+
+
+
+                                <label class="mb-0" for="new-password">New password</label>
+                                <input type="password" name="password" class="form-control" onkeyup="checkPasswordLength(this.value)" />
+
+                                <label class="mb-0" for="new-password-confirm">Confirm new password</label>
+                                <input type="password" name="rePassword" class="form-control" />
+                                <div class="d-flex justify-content-center mt-5 mb-5">
+                                    <div class="error"></div>
+                                </div>
+                                <div class="d-flex justify-content-center mt-5 mb-5">
+								<div class="errors" style="color:red;" id="errornot"></div>
+                                </div>
+
+                                    <button class="submit-btn btn-dark">Reset password</button>
+                                </div>
+                                <h><u>Password Requirements</u></h>
+                                <ul style="list-style-type:disc;">
+                                     <li id="error8" style="color:red;">Must contain minimum 8 characters</li>
+									 <li id="errorup" style="color:red;">Must contain at least 1 uppercase character</li>
+									 <li id="errorlow" style="color:red;">Must contain at least 1 lowercase character</li>
+									 <li id="errornum" style="color:red;">Must contain at least 1 number</li>
+									 <li id="errorspe" style="color:red;">Must contain at least 1 special characters</li>
+									 <li id="errorspe1" style="color:red;">Accepted Characters: @ # $ % ^ &amp; + = - _ * </li>
+                                </ul>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <script src="https://dev-sso.dermalogica.co.uk/identity/ext/resources/js/resetPassword.js"></script>
+            </main>
+        </rich:graphValidator>
+
+        <script type="text/javascript">
+		function checkPasswordLength(password) {
+  var span1 = document.getElementById("error8");
+  var span2 = document.getElementById("errorup");
+  var span3 = document.getElementById("errorlow");
+  var span4 = document.getElementById("errornum");
+  var span5 = document.getElementById("errorspe"); 
+  var span6 = document.getElementById("errorspe1");
+  if (password.length >= 8) {
+    span1.style.color = "green";
+  }
+  else
+  {
+    span1.style.color = "red";
+  }
+  if (isUpperCasehas(password)) {
+    span2.style.color = "green";
+  } else {
+    span2.style.color = "red";
+  }
+  if (isLowerCasehas(password)) {
+    span3.style.color = "green";
+  } else {
+    span3.style.color = "red";
+  }
+  if (isNumberhas(password)) {
+    span4.style.color = "green";
+  } else {
+    span4.style.color = "red";
+  }
+  if (isSpecialhas(password)) {
+    span5.style.color = "green";
+    span6.style.color = "green";
+  } else {
+    span5.style.color = "red";
+    span6.style.color = "red";
+  }
+if (isSpecialnot(password)) {
+     if(isSpecialnot(password.slice(-1)))
+  {
+        document.getElementById("subbtn").disabled = true;
+        document.getElementById("errornot").innerHTML = password.slice(-1)+ " Special character is not allowed \n";
+          }
+}
+  else
+  {
+document.getElementById("subbtn").disabled = false;  
+document.getElementById("errornot").innerHTML = "";
+}
+}
+function isUpperCasehas(string) {
+  return /[A-Z]/.test(string);
+}
+function isLowerCasehas(string) {
+  return /[a-z]/.test(string);
+}
+function isNumberhas(string) {
+  return /[1-9]/.test(string);
+}
+function isSpecialhas(string) {
+  return /[@#$%^+=&amp;\-_*]/.test(string);
+}
+function isSpecialnot(string) {
+  return /[!\[\]&lt;\|&gt;\?~{\\}(/)"':;.,`]/.test(string);
+}
+            $(document).ready(function () {
+                $('.btn-dark').removeClass('btn btn-default');
+                $('.form-control').removeClass('form-control');
+                $('link').not(':eq(6), :eq(7)').remove();
+                $('style').remove();
+                $('.logo').remove();
+            });
+        </script>
+    </ui:define>
